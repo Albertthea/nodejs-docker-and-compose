@@ -1,0 +1,50 @@
+version: '3.9'
+
+services:
+  database:
+    image: postgres:15
+    container_name: kpd-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_PGDATA: ${POSTGRES_PGDATA}
+    volumes:
+      - pgdata:${POSTGRES_PGDATA}
+    networks:
+      - kpdnet
+
+  backend:
+    container_name: kpd-backend
+    build:
+      context: ./backend
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "4000:3000"
+    depends_on:
+      - database
+    networks:
+      - kpdnet
+
+  frontend:
+    container_name: kpd-frontend
+    build:
+      context: ./frontend
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "8081:80"
+    depends_on:
+      - backend
+    networks:
+      - kpdnet
+
+volumes:
+  pgdata:
+
+networks:
+  kpdnet:
