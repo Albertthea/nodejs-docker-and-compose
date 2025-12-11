@@ -1,4 +1,4 @@
-export const URL = 'https://api.ianauniproject.nomoredomainsbs.ru';
+export const URL = 'https://api.ianauniproject.nomorepartiessbs.ru';
 
 export const MINIMUM_PASSWORD_LENGTH = 3;
 export const MINIMUM_USERNAME_LENGTH = 3;
