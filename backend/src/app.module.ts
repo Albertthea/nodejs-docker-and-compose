@@ -32,7 +32,7 @@ import * as winston from 'winston';
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
       autoLoadEntities: true,
-      synchronize: false,
+      synchronize: true,
     }),
 
     UsersModule,
